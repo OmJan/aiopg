@@ -15,7 +15,9 @@ if PY_VER < (3, 4):
 def read(f):
     return open(os.path.join(os.path.dirname(__file__), f)).read().strip()
 
+
 extras_require = {'sa': ['sqlalchemy>=1.1'], }
+extras_require["benchmark"] = ['sqlalchemy>=1.1', 'numpy>=1.13.3']
 
 
 def read_version():
@@ -28,6 +30,7 @@ def read_version():
                 return match.group(1)
         else:
             raise RuntimeError('Cannot find version in aiopg/__init__.py')
+
 
 classifiers = [
     'License :: OSI Approved :: BSD License',
