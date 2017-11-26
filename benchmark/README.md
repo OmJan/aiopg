@@ -1,10 +1,10 @@
-# to run benchmark
+* to run benchmark, about more options see benchmark.main
 
 ```sh
 python benchmark.py psycopg,aiopg,aiopg_sa
 ```
 
-# report saves to benchmark/report.json by default, psycopg runs with 10 treads by default, but aiopg, aiopg.sa in one thread
+* report saves to benchmark/report.json by default, psycopg runs with 10 treads by default, but aiopg, aiopg.sa in one thread
 
 ```json
 {
