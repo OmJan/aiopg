@@ -19,25 +19,25 @@ python benchmark.py psycopg,aiopg,aiopg_sa
   ],
   "benchmarks": [
     {
-      "name": "psycopg",
+      "name": "aiopg_sa_cache",
       "variations": [
         {
           "duration": 30.0,
-          "queries": 373705,
-          "qps": 12456.37,
-          "rps": 1245636.61,
-          "latency_min": 0.15,
-          "latency_mean": 0.795,
-          "latency_max": 10.11,
-          "latency_std": 0.548,
-          "latency_cv": 69.03,
+          "queries": 118051,
+          "qps": 3934.85,
+          "rps": 393485.11,
+          "latency_min": 0.84,
+          "latency_mean": 2.535,
+          "latency_max": 13.31,
+          "latency_std": 0.315,
+          "latency_cv": 12.44,
           "latency_percentiles": [
-            [25,0.386],
-            [50,0.637],
-            [75,1.044],
-            [90,1.532],
-            [99,2.635],
-            [99.99, 6.183]
+            [25,2.355],
+            [50,2.506],
+            [75,2.639],
+            [90,2.781],
+            [99,3.834],
+            [99.9,7.804]
           ]
         }
       ]
@@ -47,21 +47,21 @@ python benchmark.py psycopg,aiopg,aiopg_sa
       "variations": [
         {
           "duration": 30.0,
-          "queries": 186569,
-          "qps": 6218.82,
-          "rps": 621881.61,
-          "latency_min": 0.72,
-          "latency_mean": 1.602,
-          "latency_max": 6.19,
-          "latency_std": 0.112,
-          "latency_cv": 6.97,
+          "queries": 182446,
+          "qps": 6081.38,
+          "rps": 608138.08,
+          "latency_min": 0.61,
+          "latency_mean": 1.638,
+          "latency_max": 13.16,
+          "latency_std": 0.31,
+          "latency_cv": 18.93,
           "latency_percentiles": [
-            [25,1.543],
-            [50,1.598],
-            [75,1.664],
-            [90,1.722],
-            [99,1.866],
-            [99.99,3.523]
+            [25,1.512],
+            [50,1.592],
+            [75,1.672],
+            [90,1.765],
+            [99,2.726],
+            [99.99,9.318]
           ]
         }
       ]
@@ -71,21 +71,21 @@ python benchmark.py psycopg,aiopg,aiopg_sa
       "variations": [
         {
           "duration": 30.0,
-          "queries": 79803,
-          "qps": 2659.86,
-          "rps": 265985.77,
-          "latency_min": 1.54,
-          "latency_mean": 3.752,
-          "latency_max": 17.9,
-          "latency_std": 0.785,
-          "latency_cv": 20.92,
+          "queries": 88508,
+          "qps": 2950.13,
+          "rps": 295012.51,
+          "latency_min": 1.59,
+          "latency_mean": 3.383,
+          "latency_max": 16.17,
+          "latency_std": 0.372,
+          "latency_cv": 11.01,
           "latency_percentiles": [
-            [25,3.417],
-            [50,3.587],
-            [75,3.85],
-            [90,4.2],
-            [99,8.022],
-            [99.99,17.815]
+            [25,3.26],
+            [50,3.361],
+            [75,3.447],
+            [90,3.587],
+            [99,3.927],
+            [99.99,15.913]
           ]
         }
       ]
