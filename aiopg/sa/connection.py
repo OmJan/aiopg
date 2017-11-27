@@ -17,7 +17,7 @@ _query_cache_precompiled = weakref.WeakValueDictionary()
 def remember_cache(query, dialect):
     oid = id(query)
     global _query_cache_precompiled
-    _query_cache_precompiled[oid] = query.compile()
+    _query_cache_precompiled[oid] = query.compile(dialect=dialect)
     return oid
 
 
