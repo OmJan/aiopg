@@ -1,7 +1,6 @@
 import asyncio
-
+import weakref
 from sqlalchemy.sql import ClauseElement
-from sqlalchemy.sql.compiler import StrSQLCompiler
 from sqlalchemy.sql.ddl import DDLElement
 from sqlalchemy.sql.dml import UpdateBase
 
@@ -10,6 +9,24 @@ from .result import ResultProxy
 from .transaction import (RootTransaction, Transaction,
                           NestedTransaction, TwoPhaseTransaction)
 from ..utils import _SAConnectionContextManager, _TransactionContextManager
+
+
+_query_cache_precompiled = weakref.WeakValueDictionary()
+
+
+def remember_cache(query, dialect):
+    oid = id(query)
+    global _query_cache_precompiled
+    _query_cache_precompiled[oid] = query.compile()
+    return oid
+
+
+def get_query_cache(query, dialect):
+    oid = id(query)
+    global _query_cache_precompiled
+    if not _query_cache_precompiled.get(oid, None):
+        remember_cache(query, dialect)
+    return _query_cache_precompiled[oid]
 
 
 class SAConnection:
@@ -73,12 +90,9 @@ class SAConnection:
 
         if isinstance(query, str):
             yield from cursor.execute(query, dp)
-        elif isinstance(query, ClauseElement) or isinstance(query, StrSQLCompiler):
+        elif isinstance(query, ClauseElement):
             if isinstance(query, ClauseElement):
-                compiled = query.compile(dialect=self._dialect)
-            else:
-                # precompiled query
-                compiled = query
+                compiled = get_query_cache(query, dialect=self._dialect)
             # parameters = compiled.params
             if not isinstance(query, DDLElement):
                 if dp and isinstance(dp, (list, tuple)):
