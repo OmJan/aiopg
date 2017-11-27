@@ -206,7 +206,6 @@ def run_benchmark(
             cmdline = ['python3'] + ['runner.py'] + runner_switches + \
                       ['--concurrency={}'.format(args.concurrency)] + \
                       [benchmark, queryname]
-
             runner_proc = subprocess.run(
                 cmdline, stdout=subprocess.PIPE, stderr=sys.stderr)
 

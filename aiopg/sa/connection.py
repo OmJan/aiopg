@@ -1,6 +1,7 @@
 import asyncio
 
 from sqlalchemy.sql import ClauseElement
+from sqlalchemy.sql.compiler import StrSQLCompiler
 from sqlalchemy.sql.ddl import DDLElement
 from sqlalchemy.sql.dml import UpdateBase
 
@@ -72,8 +73,12 @@ class SAConnection:
 
         if isinstance(query, str):
             yield from cursor.execute(query, dp)
-        elif isinstance(query, ClauseElement):
-            compiled = query.compile(dialect=self._dialect)
+        elif isinstance(query, ClauseElement) or isinstance(query, StrSQLCompiler):
+            if isinstance(query, ClauseElement):
+                compiled = query.compile(dialect=self._dialect)
+            else:
+                # precompiled query
+                compiled = query
             # parameters = compiled.params
             if not isinstance(query, DDLElement):
                 if dp and isinstance(dp, (list, tuple)):

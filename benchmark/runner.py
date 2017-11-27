@@ -169,16 +169,16 @@ async def runner(
 
         tasks = []
 
-        # if is_cache_query:
-        #     query = query()
         if is_async:
             # Asyncio driver
             for i in range(concurrency):
                 task = worker(executor, [conns[i], query],  # noqa , query_args], add args
                               start, args.duration, timeout)
                 tasks.append(task)
-
-            results = await asyncio.gather(*tasks)
+            try:
+                results = await asyncio.gather(*tasks)
+            except Exception as e:
+                print(e)
         else:
             # Sync driver
             with futures.ThreadPoolExecutor(max_workers=concurrency) as e:

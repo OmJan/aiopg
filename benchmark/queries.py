@@ -84,7 +84,7 @@ QUERIES = {
     "simple_select": {
         "psycopg": "SELECT id from sa_tbl_1",
         "aiopg": "SELECT id from sa_tbl_1",
-        "aiopg_sa_cache": sa.select([SATable1.__table__.c.id]),
+        "aiopg_sa_cache": sa.select([SATable1.__table__.c.id]).compile(),
         "aiopg_sa": sa.select([SATable1.__table__.c.id]),
         "args": [],
         "setup": "DROP TABLE IF EXISTS sa_tbl_2 CASCADE; DROP TABLE IF EXISTS sa_tbl_1 CASCADE; CREATE TABLE sa_tbl_2 (id SERIAL NOT NULL, name VARCHAR(80), email VARCHAR(80), phone VARCHAR(80), custom_json JSON, PRIMARY KEY (id)); CREATE TABLE sa_tbl_1 (id SERIAL NOT NULL, name VARCHAR(80), email VARCHAR(80), phone VARCHAR(80), satable2_id INTEGER, custom_json JSON, PRIMARY KEY (id), FOREIGN KEY(satable2_id) REFERENCES sa_tbl_2 (id) ON DELETE SET NULL);",  # noqa,
